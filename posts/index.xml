@@ -1,0 +1,150 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on Ramblings on lessons</title>
+		<link>https://geekgunda.github.io/posts/</link>
+		<description>Recent content in Posts on Ramblings on lessons</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+		<lastBuildDate>Sat, 19 Sep 2020 15:35:14 -0400</lastBuildDate>
+		<atom:link href="https://geekgunda.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Using MySQL JSON data type with Go</title>
+			<link>https://geekgunda.github.io/posts/mysql-json-data-with-go/</link>
+			<pubDate>Sat, 19 Sep 2020 15:35:14 -0400</pubDate>
+			
+			<guid>https://geekgunda.github.io/posts/mysql-json-data-with-go/</guid>
+			<description>tl;dr:
+ Use json-encoded []byte to write to a JSON column in MySQL
+Use json.RawMessage to read a JSON column from MySQL
+  Recently, I was trying to use MySQL 8.0&amp;rsquo;s JSON data type within a Go project.
+After a long, unsatisfactory search, multiple trial and errors, I found a working solution.
+So I thought I&amp;rsquo;d document it here for future reference.
+Bringing up a MySQL server A simple docker-compose file to setup mysql server:</description>
+			<content type="html"><![CDATA[<p><strong>tl;dr:</strong></p>
+<blockquote>
+<p>Use <em>json-encoded</em> <code>[]byte</code> to <strong>write</strong> to a JSON column in MySQL<br>
+Use <code>json.RawMessage</code> to <strong>read</strong> a JSON column from MySQL</p>
+</blockquote>
+<hr>
+<p>Recently, I was trying to use <a href="https://dev.mysql.com/doc/refman/8.0/en/json.html">MySQL 8.0&rsquo;s JSON data type</a> within a Go project.<br>
+After a long, unsatisfactory search, multiple trial and errors, I found a working solution.<br>
+So I thought I&rsquo;d document it here for future reference.</p>
+<h4 id="bringing-up-a-mysql-server">Bringing up a MySQL server</h4>
+<p>A simple docker-compose file to setup mysql server:</p>
+<p>File: <code>docker-compose.yml</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w"> 
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w"> 
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:8.0</span><span class="w">
+</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span>--<span class="l">default-authentication-plugin=mysql_native_password</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">somerandomkeyword</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">3306</span><span class="p">:</span><span class="m">3306</span><span class="w">
+</span></code></pre></div><p>Command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose up -d
+</code></pre></div><h4 id="setup-mysql-db-and-schema">Setup MySQL DB and schema</h4>
+<p>The following snippet creates a database and a table having one of the columns with JSON data type:</p>
+<p>File: <code>db.sql</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DROP</span> <span class="k">DATABASE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">scoringdb</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">scoringdb</span><span class="p">;</span>
+
+<span class="n">USE</span> <span class="n">scoringdb</span><span class="p">;</span>
+
+<span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">gamestats</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">gamestats</span><span class="o">`</span><span class="p">(</span>
+    <span class="o">`</span><span class="n">stat_id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">player</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">yards</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">longest</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">touchdowns</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">misc</span><span class="o">`</span> <span class="n">JSON</span><span class="p">,</span>
+    <span class="k">INDEX</span> <span class="o">`</span><span class="n">idx_player</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">player</span><span class="o">`</span><span class="p">),</span>
+    <span class="k">INDEX</span> <span class="o">`</span><span class="n">idx_yards</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">yards</span><span class="o">`</span><span class="p">),</span>
+    <span class="k">INDEX</span> <span class="o">`</span><span class="n">idx_longest</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">longest</span><span class="o">`</span><span class="p">),</span>
+    <span class="k">INDEX</span> <span class="o">`</span><span class="n">idx_touchdowns</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">touchdowns</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="nb">CHARACTER</span> <span class="k">SET</span> <span class="n">utf8</span><span class="p">;</span>
+
+<span class="n">FLUSH</span> <span class="n">TABLES</span><span class="p">;</span>
+</code></pre></div><p>Command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">mysql -uroot -psomerandomkeyword -h 127.0.0.1 &lt; db.sql
+</code></pre></div><p>A schema like this can be useful when there is a huge chunk of metadata, but only a few fields need indexing.</p>
+<h4 id="writing-to-a-json-column">Writing to a JSON column</h4>
+<p>A sample gaming stats struct for reference:<br>
+The <code>interface{}</code> fields are raw input, received from a dump file and the corresponding <code>int</code> fields are parsed values for them.</p>
+<p>File: <code>contract.go</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Stat</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Player</span>             <span class="kt">string</span>      <span class="s">`json:&#34;Player&#34;`</span>
+    <span class="nx">Team</span>               <span class="kt">string</span>      <span class="s">`json:&#34;Team&#34;`</span>
+    <span class="nx">Position</span>           <span class="kt">string</span>      <span class="s">`json:&#34;Pos&#34;`</span>
+    <span class="nx">Attempts</span>           <span class="kt">int</span>         <span class="s">`json:&#34;Att&#34;`</span>
+    <span class="nx">AttemptsPerGameAvg</span> <span class="kt">float64</span>     <span class="s">`json:&#34;Att/G&#34;`</span>
+    <span class="nx">Yards</span>              <span class="kd">interface</span><span class="p">{}</span> <span class="s">`json:&#34;Yds&#34;`</span>
+    <span class="nx">YardsParsed</span>        <span class="kt">int</span>         <span class="s">`json:&#34;-&#34;`</span>
+    <span class="nx">AvgYardsPerAttempt</span> <span class="kt">float64</span>     <span class="s">`json:&#34;Yds/G&#34;`</span>
+    <span class="nx">Touchdowns</span>         <span class="kt">int</span>         <span class="s">`json:&#34;TD&#34;`</span>
+    <span class="nx">Longest</span>            <span class="kd">interface</span><span class="p">{}</span> <span class="s">`json:&#34;Lng&#34;`</span>
+    <span class="nx">LongestParsed</span>      <span class="kt">int</span>         <span class="s">`json:&#34;-&#34;`</span>
+    <span class="nx">LongestIsTouchdown</span> <span class="kt">bool</span>        <span class="s">`json:&#34;-&#34;`</span>
+    <span class="nx">FirstDown</span>          <span class="kt">int</span>         <span class="s">`json:&#34;1st&#34;`</span>
+    <span class="nx">PerFirstDown</span>       <span class="kt">float64</span>     <span class="s">`json:&#34;1st%&#34;`</span>
+    <span class="nx">Yards20</span>            <span class="kt">int</span>         <span class="s">`json:&#34;20+&#34;`</span>
+    <span class="nx">Yards40</span>            <span class="kt">int</span>         <span class="s">`json:&#34;40+&#34;`</span>
+    <span class="nx">Fumbles</span>            <span class="kt">int</span>         <span class="s">`json:&#34;FUM&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Stats</span> <span class="p">[]</span><span class="nx">Stat</span>
+</code></pre></div><p>To write above struct into the table schema we defined earlier,</p>
+<ul>
+<li>standard fields get written as is,</li>
+<li>for the JSON column, a json-encoded <code>[]byte</code> is needed.</li>
+</ul>
+<p>File: <code>model.go</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">InsertGameStats</span><span class="p">(</span><span class="nx">s</span> <span class="nx">Stat</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="nx">js</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">err</span> 
+    <span class="p">}</span>
+    <span class="nx">stmt</span> <span class="o">:=</span> <span class="s">&#34;INSERT INTO `gamestats`&#34;</span>
+    <span class="nx">stmt</span> <span class="o">+=</span> <span class="s">&#34;(player,yards,longest,touchdowns,misc) VALUES (?,?,?,?,?)&#34;</span>
+    <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Exec</span><span class="p">(</span><span class="nx">stmt</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Player</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">YardsParsed</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">LongestParsed</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Touchdowns</span><span class="p">,</span> <span class="nx">js</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="nx">err</span>
+<span class="p">}</span>
+</code></pre></div><h4 id="reading-the-values-from-a-json-column">Reading the values from a JSON column</h4>
+<p>For reading and parsing the passed data, we&rsquo;ll need to use <code>json.RawMessage</code> type.</p>
+<p>File: <code>contract.go</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">FetchStats</span><span class="p">()</span> <span class="p">(</span><span class="nx">Stats</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">stmt</span> <span class="o">:=</span> <span class="s">&#34;SELECT misc from `gamestats` limit 10&#34;</span>
+    <span class="kd">var</span> <span class="nx">ss</span> <span class="nx">Stats</span>
+    <span class="nx">rows</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Query</span><span class="p">(</span><span class="nx">stmt</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+    <span class="p">}</span>
+    <span class="k">defer</span> <span class="nx">rows</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+    <span class="k">for</span> <span class="nx">rows</span><span class="p">.</span><span class="nf">Next</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">data</span> <span class="nx">json</span><span class="p">.</span><span class="nx">RawMessage</span> <span class="c1">// for JSON column type
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">stat</span> <span class="nx">Stat</span>
+        <span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">rows</span><span class="p">.</span><span class="nf">Scan</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">data</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">stat</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+        <span class="p">}</span>
+        <span class="nx">ss</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">ss</span><span class="p">,</span> <span class="nx">stat</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">rows</span><span class="p">.</span><span class="nf">Err</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">ss</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div><p>And that&rsquo;s it!</p>
+]]></content>
+		</item>
+		
+	</channel>
+</rss>

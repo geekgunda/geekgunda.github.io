@@ -3,16 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://geekgunda.github.io/about-me/</loc>
-    <lastmod>2020-09-19T15:30:57-04:00</lastmod>
+    <loc>https://geekgunda.github.io/tags/go/</loc>
+    <lastmod>2020-09-19T15:35:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://geekgunda.github.io/tags/mysql/</loc>
+    <lastmod>2020-09-19T15:35:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://geekgunda.github.io/posts/</loc>
+    <lastmod>2020-09-19T15:35:14-04:00</lastmod>
   </url>
   
   <url>
     <loc>https://geekgunda.github.io/</loc>
+    <lastmod>2020-09-19T15:35:14-04:00</lastmod>
   </url>
   
   <url>
     <loc>https://geekgunda.github.io/tags/</loc>
+    <lastmod>2020-09-19T15:35:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://geekgunda.github.io/posts/mysql-json-data-with-go/</loc>
+    <lastmod>2020-09-19T15:35:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://geekgunda.github.io/about-me/</loc>
+    <lastmod>2020-09-19T15:30:57-04:00</lastmod>
   </url>
   
 </urlset>

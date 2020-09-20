@@ -6,6 +6,25 @@
     <description>Recent content in Tags on Ramblings on lessons</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://geekgunda.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Sat, 19 Sep 2020 15:35:14 -0400</lastBuildDate><atom:link href="https://geekgunda.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go</title>
+      <link>https://geekgunda.github.io/tags/go/</link>
+      <pubDate>Sat, 19 Sep 2020 15:35:14 -0400</pubDate>
+      
+      <guid>https://geekgunda.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>https://geekgunda.github.io/tags/mysql/</link>
+      <pubDate>Sat, 19 Sep 2020 15:35:14 -0400</pubDate>
+      
+      <guid>https://geekgunda.github.io/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
