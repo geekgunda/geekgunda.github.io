@@ -142,7 +142,8 @@ The <code>interface{}</code> fields are raw input, received from a dump file and
     <span class="p">}</span>
     <span class="k">return</span> <span class="nx">ss</span><span class="p">,</span> <span class="kc">nil</span>
 <span class="p">}</span>
-</code></pre></div><p>And that&rsquo;s it!</p>
+</code></pre></div><p>And that&rsquo;s it!<br>
+To see a working version of this app, checkout the full project here: <a href="https://github.com/geekgunda/nfl-rushing">https://github.com/geekgunda/nfl-rushing</a></p>
 ]]></content>
 		</item>
 		
