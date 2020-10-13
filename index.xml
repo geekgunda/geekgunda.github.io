@@ -7,7 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 19 Sep 2020 15:35:14 -0400</lastBuildDate><atom:link href="https://geekgunda.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Oct 2020 10:59:38 -0400</lastBuildDate><atom:link href="https://geekgunda.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Immigrating to Canada</title>
+      <link>https://geekgunda.github.io/posts/immigrating-to-canada/</link>
+      <pubDate>Sun, 11 Oct 2020 10:59:38 -0400</pubDate>
+      
+      <guid>https://geekgunda.github.io/posts/immigrating-to-canada/</guid>
+      <description>This year, my wife and I moved to Canada as permanent residents. I&amp;rsquo;ve decided to note down my experience and lessons.
+Here&amp;rsquo;s a tentative timeline and the steps that got us here. Please note that the timelines are from a pre-pandemic 2019 world!
+  Identifying the best suited immigration plan
+IRCC tool: Come to Canada tool
+In this tool, some specific information is needed:
+ Language proficiency test scores Canadian equivalent educational qualifications  Steps on how to get these details are explained below.</description>
+    </item>
+    
     <item>
       <title>Using MySQL JSON data type with Go</title>
       <link>https://geekgunda.github.io/posts/mysql-json-data-with-go/</link>

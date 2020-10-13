@@ -6,8 +6,156 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Sat, 19 Sep 2020 15:35:14 -0400</lastBuildDate>
+		<lastBuildDate>Sun, 11 Oct 2020 10:59:38 -0400</lastBuildDate>
 		<atom:link href="https://geekgunda.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Immigrating to Canada</title>
+			<link>https://geekgunda.github.io/posts/immigrating-to-canada/</link>
+			<pubDate>Sun, 11 Oct 2020 10:59:38 -0400</pubDate>
+			
+			<guid>https://geekgunda.github.io/posts/immigrating-to-canada/</guid>
+			<description>This year, my wife and I moved to Canada as permanent residents. I&amp;rsquo;ve decided to note down my experience and lessons.
+Here&amp;rsquo;s a tentative timeline and the steps that got us here. Please note that the timelines are from a pre-pandemic 2019 world!
+  Identifying the best suited immigration plan
+IRCC tool: Come to Canada tool
+In this tool, some specific information is needed:
+ Language proficiency test scores Canadian equivalent educational qualifications  Steps on how to get these details are explained below.</description>
+			<content type="html"><![CDATA[<p>This year, my wife and I moved to Canada as <a href="https://en.wikipedia.org/wiki/Permanent_residency_in_Canada">permanent residents</a>.
+I&rsquo;ve decided to note down my experience and lessons.</p>
+<p>Here&rsquo;s a tentative timeline and the steps that got us here. Please note that the timelines are from a pre-pandemic 2019 world!</p>
+<ol>
+<li>
+<p>Identifying the best suited immigration plan</p>
+<p>IRCC tool: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/come-canada-tool.html">Come to Canada tool</a><br>
+In this tool, some specific information is needed:</p>
+<ul>
+<li>Language proficiency test scores</li>
+<li>Canadian equivalent educational qualifications</li>
+</ul>
+<p>Steps on how to get these details are explained below.</p>
+<p>Canada offers multiple pathways to immigrate. Depending upon your education, work stream, age, years of work experience and other factors, you might be eligible for one or more such plans.<br>
+In our case, we were eligible for <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html">Express Entry</a>
+via <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/federal-skilled-workers.html">Federal Skilled Workers program</a>.</p>
+</li>
+<li>
+<p>Preparing documents for Express Entry application</p>
+<p>List of documents by IRCC: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents.html">Documents for Express Entry</a></p>
+<p>Following documents were mandatory. Ideally you can prepare all three in parallel.</p>
+<ul>
+<li>
+<p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/education-assessed.html">ECA - Educational Credential Assessment</a></p>
+<p>Agency used: <a href="https://www.wes.org/ca/about-wes-credential-evaluation/">WES - World Education Services</a><br>
+Processing time: ~ 2 to 3 months</p>
+<p>The educational degrees from outside Canada needs to be evaluated to get the equivalent Canadian education.
+The time taken also depends on how long your college or university takes to send originals to WES.</p>
+</li>
+<li>
+<p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/language-requirements.html">Language Proficiency Test</a></p>
+<p>Test used: <a href="http://www.ielts.org/">IELTS</a><br>
+Processing time: ~ 1 week</p>
+<p>Canada has two official languages: English and French. A separate test is needed to evaluate your language proficiency (in one or both languages).
+For English, IELTS used to run a test every 2-4 weeks at various test centers.</p>
+</li>
+<li>
+<p>Passport</p>
+<p>Agency: Passport Seva Kendra (India) - <a href="https://portal1.passportindia.gov.in/AppOnlineProject/welcomeLink#">Portal1</a> or
+<a href="https://portal2.passportindia.gov.in/AppOnlineProject/welcomeLink#">Portal2</a><br>
+Processing time: ~ 1 month</p>
+<p>We decided to renew our passports to avoid getting stuck in a foreign country with an expired passport.
+An additional requirement for us was to get spouse name added to our respective passports.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Express Entry Application</p>
+<p>Portal: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile.html">Express Entry profile</a><br>
+Processing time: ~ 1 month</p>
+<p>With all these documents in place, we created our Express entry profiles on IRCC website.
+Following details were required to fill the application. Apart from these, other major heads were personal details, contact details and language proficiency.</p>
+<ul>
+<li>
+<p>Education history</p>
+<p>List of all educational degrees undertaken along with the institution details.
+We had to use the ECA report we acquired earlier to fill the Canadian equivalency for each degree.</p>
+</li>
+<li>
+<p>Work history</p>
+<p>List of all the job titles held along with company name, start and end date for each role.
+We also needed to find out <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/find-national-occupation-code.html">NOC - National Occupational
+Classification</a>
+code for each role.</p>
+</li>
+</ul>
+<p>We created two express entry profiles, one with my wife as the primary applicant and other with me as the primary applicant.
+We ended up submitting both the profiles to the express entry pool. There was no fee up until this point.
+As the criteria and priority for <a href="https://www.immigration.ca/fast-track-high-demand-occupations">professions in high demand</a> keeps changing, either of the profiles could get shortlisted.</p>
+</li>
+<li>
+<p>Permanent Residency Application</p>
+<p>After we received our ITA (Invitation to Apply for Permanent Residency), next step was to complete our Permanent Residency application.
+Apart from the specific details listed below, application also needed passport, photo, marriage certificate and educational degrees per applicant.</p>
+<ul>
+<li>
+<p>Address history</p>
+<p>List of all home addresses where the primary applicant has resided in past 5 - 10 years. We had to fill in the exact move-in and move out dates per address.</p>
+</li>
+<li>
+<p>Travel history</p>
+<p>List of all the international travel undertaken by the primary applicant. We also needed dates and names of cities visited, per trip.</p>
+</li>
+<li>
+<p>Employment records</p>
+<p>For each role listed under work history per applicant, we had to get an official letter from the corresponding organization verifying the tenure, role and responsibilities.
+Payslips for compensation received over the duration of each role was also required. All these documents needed to be signed and sealed by the respective organization.</p>
+</li>
+<li>
+<p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/apply-permanent-residence/police-certificates.html">Police Clearance Certificate</a></p>
+<p>Processing time: ~ 1 week</p>
+<p>A proof of criminal history (or a lack thereof). In India, we got this via Passport Seva Kendra (PSK) too.</p>
+<p>BEWARE: Processing times can vary widely!</p>
+</li>
+<li>
+<p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/medical-exams.html">Medical exam</a></p>
+<p>Processing time: ~ 1 month</p>
+<p>An upfront medical check up was required for each applicant. We only had to submit the reference details of the checkup in application.
+Final report was directly submitted to IRCC by the hospital. We used this portal to <a href="https://secure.cic.gc.ca/pp-md/pp-list.aspx">find a panel physician</a>.</p>
+<p>BEWARE: The expiry of your medical report will determine the expiry of your final travel documents!</p>
+</li>
+<li>
+<p><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/proof-funds.html">Proof of funds</a></p>
+<p>Depending upon number of applicants, we had to show sufficient funds availablity for immigrating to Canada.<br>
+We needed following documents from our bank for this:</p>
+<ul>
+<li>Last 6 months bank statement</li>
+<li>Balance confirmation letter</li>
+<li>Fixed Deposit statement</li>
+<li>Credit Card statement</li>
+</ul>
+<p>All of these had to be signed and sealed by the bank. We drew the statements as close to the date of submitting the application, as possible.
+Also note, these funds and statements should not be coming from market linked instruments like stocks, mutual funds etc.</p>
+</li>
+</ul>
+<p>Last, but not least, we needed to pay the
+<a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/apply-permanent-residence/fees.html">application fee for Express Entry</a>.
+Upon successful submission, we received AoR (Acknowledgement of Receipt).</p>
+<p>Once our medical exam reports reached IRCC, we received
+a <a href="https://www.canada.ca/en/immigration-refugees-citizenship/campaigns/biometrics.html">Biometric Instruction Letter</a>.<br>
+We had to visit a collection point for enrolling our photo and fingerprints.<br>
+Processing time: ~ 1 week</p>
+<p>After this, we had to wait to hear back from IRCC. Sometimes, they ask for additional documents or proofs. In our case, no such request was made.
+IRCC portal&rsquo;s application status page kept us informed of tentative timelines to expect.<br>
+Processing time: ~ 3 months</p>
+<p>Next, we received a request for submitting our passports for stamping (Ready for Visa letter).<br>
+In our case, we had to submit our passports at <a href="http://www.vfsglobal.ca/canada/india">VFS Global</a>.
+Finally the visa was stamped into our passport and returned back.<br>
+We also received a <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/application-approved.html">Confirmation of Permanent Residence - CoPR</a><br>
+Processing time: ~ 1 month</p>
+</li>
+</ol>
+<p>And that was it!</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Using MySQL JSON data type with Go</title>
